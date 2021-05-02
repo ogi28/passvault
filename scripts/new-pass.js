@@ -11,8 +11,8 @@ function saveNewPass(e) {
      */
     accounts.push(
         {
-            accountName: accountName,
-            username,
+            accountName,
+            username, /*: username*/
             password
         }
     );
@@ -28,11 +28,11 @@ function getValue(inputType) {
 }
 
 function getAccounts() {
-    return JSON.parse(localStorage.getItem('accounts')) || [];
+    return JSON.parse(localStorage.getItem('accountStorage')) || [];
 }
 
 function setAccounts(accounts) {
-    localStorage.setItem('accounts', JSON.stringify(accounts))
+    localStorage.setItem('accountStorage', JSON.stringify(accounts))
 }
 
 

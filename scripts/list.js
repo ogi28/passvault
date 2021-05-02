@@ -1,5 +1,9 @@
 let rowCount = 0;
 
+function getAccounts() {
+    return JSON.parse(localStorage.getItem('accountStorage')) || [];
+}
+
 /**
  * Creates a row in the table
  *
@@ -53,6 +57,12 @@ window.onload = () => {
             element.classList.toggle('shown');
             element.textContent = isPassShown() ? 'Hide' : 'Show';
         });
+    });
+
+    document.querySelectorAll('.actions button.copy-btn').forEach(b =>{
+        b.addEventListener('click', evt => {
+            copyToClipboard(evt.target.dataset.pass);
+        })
     })
 }
 
