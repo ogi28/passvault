@@ -6,15 +6,30 @@ let rowCount = 0;
  * @param {{accountName: string, username: string, password: string}} account
  * @returns {string}
  */
-const createRow = (account) => `
-<tr id="row_${++rowCount}">
-    <td>${rowCount}</td>
-    <td>${account.accountName}</td>
-    <td>${account.username}</td>
-    <td class="pass">${'*'.repeat(7)}</td>
-    <td class="show-btn" data-id="${rowCount}" data-pass="${account.password}">Show</td>
-</tr>
-`;
+
+
+const createRow = account => {
+    const pwd = account.password;
+
+    return `
+    <tr id="row_${++rowCount}">
+        <td>${rowCount}</td>
+        <td>${account.accountName}</td>
+        <td>${account.username}</td>
+        <td class="pass">${'*'.repeat(7)}</td>
+        <td class="actions">
+            <button class="show-btn" data-id="${rowCount}" data-pass="${pwd}">Show</button>
+            <button class="copy-btn" data-pass="${pwd}">Copy</button>
+        </td>
+    </tr>
+    `
+}
+
+/*
+function createRow(account) {
+    return `...`
+}
+ */
 
 window.onload = () => {
     const accounts = getAccounts();
@@ -22,7 +37,7 @@ window.onload = () => {
     const tbody = document.querySelector('table tbody');
     tbody.innerHTML = rows;
 
-    document.querySelectorAll('.show-btn').forEach(btn => {
+    document.querySelectorAll('.actions button.show-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             /**
              * @type {HTMLElement}
@@ -41,6 +56,14 @@ window.onload = () => {
     })
 }
 
-function getAccounts() {
-    return JSON.parse(localStorage.getItem('accounts')) || [];
+function copyToClipboard(str) {
+    const el = document.createElement('textarea');
+    el.value = str;
+    el.setAttribute('readonly', '');
+    el.style.position = 'absolute';
+    el.style.left = '-9999px';
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
 }

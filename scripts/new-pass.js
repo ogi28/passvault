@@ -1,10 +1,14 @@
-function saveNewPass() {
+function saveNewPass(e) {
+    e.preventDefault();
     const accountName = getValue('account');
     const username = getValue('username');
     const password = getValue('password');
 
     const accounts = getAccounts();
 
+    /*
+    If the key and value are same, we can just use key.
+     */
     accounts.push(
         {
             accountName: accountName,
@@ -16,8 +20,10 @@ function saveNewPass() {
     setAccounts(accounts);
 }
 
-function getValue(inputName) {
-    const input = document.querySelector(`input[name='${inputName}']`);
+function getValue(inputType) {
+    const input = document.querySelector(`input[name='${inputType}']`);
+    //debugger;
+   // input.required = true;
     return input.value;
 }
 

@@ -10,15 +10,14 @@
 <div>
     <h1>New Password</h1>
 </div>
-<form action="">
-    <input name="account" placeholder="Account name" />
-    <input name="username" placeholder="Username/Email" />
-    <input name="password" placeholder="Password" />
-    <button onclick="saveNewPass()">Save</button>
+<form onsubmit="saveNewPass(event)">
+    <input required name="account" placeholder="Account name" />
+    <input required name="username" placeholder="Username/Email" />
+    <input required name="password" type="password" placeholder="Password" />
+    <input type="submit" value="Save">
 </form>
 
 <a href="index.html">Home</a>
-<script src="../data/accounts.js"></script>
 <script src="../scripts/new-pass.js"></script>
 </body>
 </html>
