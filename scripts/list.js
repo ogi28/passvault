@@ -17,9 +17,9 @@ const createRow = account => {
         <td>${account.username}</td>
         <td class="pass">${'*'.repeat(7)}</td>
         <td class="actions">
-            <button class="show-btn button btn-primary" data-id="${rowCount}" data-pass="${pwd}">&#128065;</button>
-            <button class="copy-btn button btn-primary" data-pass="${pwd}">Copy</button>
-            <button class="delete-btn button btn-danger" data-id="${rowCount}">Delete</button>
+            <button class="show-btn btn btn-primary" data-id="${rowCount}" data-pass="${pwd}">&#128065;</button>
+            <button class="copy-btn btn btn-primary" data-pass="${pwd}">Copy</button>
+            <button class="delete-btn btn btn-danger" data-id="${rowCount}">Delete</button>
         </td>
     </tr>
     `

@@ -1,4 +1,4 @@
-.button {
+.btn {
     margin: 4px 4px;
     text-decoration: none;
     border: none;
@@ -32,20 +32,17 @@
     color: white;
 }
 
-a.button span {
-    cursor: pointer;
-    display: inline-block;
-    position: relative;
-    transition: 0.5s;
+.btn-block {
+    width: 100%;
 }
 
-a.button span:after {
-    content: '\00bb';
-    position: absolute;
-    opacity: 0;
-    top: 0;
-    right: -20px;
-    transition: 0.5s;
+input:not([type]),
+input[type="text"],
+input[type="password"] {
+    font-size: 16px;
+    padding: 10px 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 body {

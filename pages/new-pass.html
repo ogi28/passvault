@@ -5,21 +5,23 @@
     <title>New Password</title>
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';"/>
     <link rel="stylesheet" href="../assets/main.css"/>
+    <link rel="stylesheet" href="../assets/new-pass.css"/>
 </head>
 <body>
 <div class="back-wrapper">
-    <a href="index.html" class="button btn-primary"><span>&larr;</span></a>
+    <a href="index.html" class="btn btn-primary"><span>&larr;</span></a>
 </div>
-<div>
-    <h1>New Password</h1>
+<div class="main">
+    <div>
+        <h1>New Password</h1>
+    </div>
+    <form name="input" onsubmit="saveNewPass(event)">
+        <input required name="account" placeholder="Account name"/>
+        <input required name="username" placeholder="Username/Email"/>
+        <input required name="password" type="password" placeholder="Password"/>
+        <input type="submit" class="btn btn-primary btn-block" value="Save">
+    </form>
 </div>
-<form name="input" onsubmit="saveNewPass(event)">
-    <input required name="account" placeholder="Account name"/>
-    <input required name="username" placeholder="Username/Email"/>
-    <input required name="password" type="password" placeholder="Password"/>
-    <input type="submit" class="button btn-primary" value="Save">
-</form>
-
 <script src="../scripts/lib/accounts.js"></script>
 <script src="../scripts/new-pass.js"></script>
 </body>
