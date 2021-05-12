@@ -1,3 +1,5 @@
+const {contextBridge, clipboard} = require('electron');
+
 window.addEventListener('DOMContentLoaded', () => {
     const replaceText = (selector, text) => {
         const element = document.getElementById(selector)
@@ -8,3 +10,7 @@ window.addEventListener('DOMContentLoaded', () => {
         replaceText(`${type}-version`, process.versions[type])
     }
 })
+
+contextBridge.exposeInMainWorld('Util', {
+    copyToClipboard: (text) => clipboard.write({text})
+});
