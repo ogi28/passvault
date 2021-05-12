@@ -20,6 +20,8 @@ function saveNewPass(e) {
     setAccounts(accounts);
 
     document.forms['input'].reset();
+
+    alert('New password has been successfully added!');
 }
 
 function getValue(inputType) {
