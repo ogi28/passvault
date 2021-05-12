@@ -17,14 +17,13 @@ const createRow = account => {
         <td>${account.username}</td>
         <td class="pass">${'*'.repeat(7)}</td>
         <td class="actions">
-            <button class="show-btn" data-id="${rowCount}" data-pass="${pwd}">Show</button>
-            <button class="copy-btn" data-pass="${pwd}">Copy</button>
-            <button class="delete-btn" data-id="${rowCount}">Delete</button>
+            <button class="show-btn button btn-primary" data-id="${rowCount}" data-pass="${pwd}">&#128065;</button>
+            <button class="copy-btn button btn-primary" data-pass="${pwd}">Copy</button>
+            <button class="delete-btn button btn-danger" data-id="${rowCount}">Delete</button>
         </td>
     </tr>
     `
 }
-
 const getShowButtons = () => document.querySelectorAll('.actions button.show-btn');
 const getCopyButtons = () => document.querySelectorAll('.actions button.copy-btn');
 const getDeleteButtons = () => document.querySelectorAll('.actions button.delete-btn');
@@ -48,7 +47,7 @@ function handleShowButton(e) {
         : element.dataset.pass;
 
     element.classList.toggle('shown');
-    element.textContent = isPassShown() ? 'Hide' : 'Show';
+    element.innerHTML = isPassShown() ? '&#128064;' : '&#128065;';
 }
 
 function handleCopyButton(e) {
@@ -56,6 +55,10 @@ function handleCopyButton(e) {
 }
 
 function handleDeleteButton(e) {
+    if (!confirm('Are you sure?')) {
+        return;
+    }
+
     const {id} = e.target.dataset;
     const index = id - 1;
 

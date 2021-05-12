@@ -1,27 +1,45 @@
-a.button{
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: inherit;
-
-    text-decoration: none;
-    color: black;
-    background-color: gray;
-    user-select: none;
-    padding: 5px 10px;
-    border-radius: 1000px;
+.button {
     margin: 4px 4px;
-    display: inline-block;
+    text-decoration: none;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
     text-align: center;
+    user-select: none;
+    cursor: pointer;
+    border-radius: 20px;
+    display: inline-block;
+    line-height: 18px;
 }
 
-a.button span{
+.btn-primary {
+    background-color: dodgerblue;
+    color: white;
+}
+
+.btn-success {
+    background-color: yellowgreen;
+    color: white;
+}
+
+.btn-warning {
+    background-color: orange;
+    color: white;
+}
+
+.btn-danger {
+    background-color: crimson;
+    color: white;
+}
+
+a.button span {
     cursor: pointer;
     display: inline-block;
     position: relative;
     transition: 0.5s;
 }
 
-a.button span:after{
+a.button span:after {
     content: '\00bb';
     position: absolute;
     opacity: 0;
@@ -30,20 +48,7 @@ a.button span:after{
     transition: 0.5s;
 }
 
-input[type=submit]{
-    text-decoration: none;
-    color: black;
-    background-color: gray;
-    user-select: none;
-    padding: 5px 10px;
-    border-radius: 1000px;
-    margin: 4px 4px;
-    display: inline-block;
-    text-align: center;
-}
-
-
-body{
+body {
     background: black;
     color: white;
     font-family: sans-serif;
