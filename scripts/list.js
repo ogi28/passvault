@@ -9,6 +9,7 @@ function getAccounts() {
  *
  * @param {{accountName: string, username: string, password: string}} account
  * @returns {string}
+
  */
 
 
@@ -24,6 +25,7 @@ const createRow = account => {
         <td class="actions">
             <button class="show-btn" data-id="${rowCount}" data-pass="${pwd}">Show</button>
             <button class="copy-btn" data-pass="${pwd}">Copy</button>
+            <button class="delete-btn" data-id="${rowCount}" data-pass="${pwd}">Delete</button>
         </td>
     </tr>
     `
@@ -45,6 +47,7 @@ window.onload = () => {
         btn.addEventListener('click', (e) => {
             /**
              * @type {HTMLElement}
+
              */
             const element = e.target;
             const tdPass = document.querySelector(`#row_${element.dataset.id} td.pass`);
@@ -64,7 +67,17 @@ window.onload = () => {
             copyToClipboard(evt.target.dataset.pass);
         })
     })
+
+    document.querySelectorAll('.actions button.delete-btn').forEach(d =>{
+        d.addEventListener('click', evt => {
+            // const tdPass = document.querySelector(`#row_${element.dataset.id} td.pass`);
+            //deleteAccounts();
+            localStorage.removeItem(`${evt.target.dataset}`);
+        })
+    })
 }
+
+//function goTo()
 
 function copyToClipboard(str) {
     const el = document.createElement('textarea');

@@ -17,13 +17,21 @@ function saveNewPass(e) {
         }
     );
 
+    // alert('Added Successfully');
+
+    /*    document.querySelectorAll(`input[name='account'],
+        input[name='username'],
+        input[name='password']`).value() =''; */
+
     setAccounts(accounts);
+
+    document.forms['input'].reset();
 }
 
 function getValue(inputType) {
     const input = document.querySelector(`input[name='${inputType}']`);
     //debugger;
-   // input.required = true;
+    // input.required = true;
     return input.value;
 }
 
@@ -35,4 +43,7 @@ function setAccounts(accounts) {
     localStorage.setItem('accountStorage', JSON.stringify(accounts))
 }
 
+function deleteAccounts(accounts){
+    localStorage.removeItem('accountStorage', JSON);
+}
 

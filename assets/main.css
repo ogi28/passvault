@@ -1,5 +1,50 @@
-body{
-    background: white;
+a.button{
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: inherit;
+
+    text-decoration: none;
     color: black;
+    background-color: gray;
+    user-select: none;
+    padding: 5px 10px;
+    border-radius: 1000px;
+    margin: 4px 4px;
+    display: inline-block;
+    text-align: center;
+}
+
+a.button span{
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+a.button span:after{
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+input[type=submit]{
+    text-decoration: none;
+    color: black;
+    background-color: gray;
+    user-select: none;
+    padding: 5px 10px;
+    border-radius: 1000px;
+    margin: 4px 4px;
+    display: inline-block;
+    text-align: center;
+}
+
+
+body{
+    background: black;
+    color: white;
     font-family: sans-serif;
 }

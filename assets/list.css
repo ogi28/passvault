@@ -25,9 +25,9 @@ table tbody td {
     user-select: none;
     border: none;
     padding: 5px 10px;
-    border-radius: 5px;
+    border-radius: 1000px;
     color: black;
-    margin: 4px 2px;
+    margin: 4px 4px;
     display: inline-block;
     text-align: center;
     text-decoration: none;
