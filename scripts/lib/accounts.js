@@ -1,7 +1,17 @@
-function getAccounts() {
-    return JSON.parse(localStorage.getItem('accountStorage')) || [];
+const accountsCRUDAPI = Db.createCRUDAPI('accounts');
+
+function get(id) {
+    return accountsCRUDAPI.get({id: id});
 }
 
-function setAccounts(accounts) {
-    localStorage.setItem('accountStorage', JSON.stringify(accounts));
+function getAll() {
+    return accountsCRUDAPI.get();
+}
+
+function add(account) {
+    return accountsCRUDAPI.create(account);
+}
+
+function update(id, account) {
+    return accountsCRUDAPI.update(account, {id: id});
 }

@@ -1,7 +1,9 @@
-const {contextBridge, clipboard} = require('electron');
-const {dbExecution} = require('./scripts/lib/MySQL'); 
 //const {a:{h}} = require
-console.log(dbExecution)
+
+require('./scripts/lib/db');
+require('./scripts/lib/db-deprecated');
+require('./scripts/lib/util');
+
 window.addEventListener('DOMContentLoaded', () => {
     const replaceText = (selector, text) => {
         const element = document.getElementById(selector)
@@ -14,54 +16,5 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 })
 
-
-contextBridge.exposeInMainWorld('Util', {
-    copyToClipboard: (text) => clipboard.write({text})
-
-});
-
-
-contextBridge.exposeInMainWorld('db', {
-    addNewAccount: (account) => {
-        dbExecution(connection => {
-            const sql = `INSERT INTO \`accounts\` (\`account\`, \`username\`, \`password\`) VALUES ('${account.accountName}', '${account.username}', '${account.password}');`;
-            
-            connection.query(sql, function (err) { //fields not used?
-                if (err) {
-                    throw err;
-                }
-            })
-        })
-    },
-    deletePassword: (idDel) => {
-        return new Promise((resolve, reject) =>{
-            dbExecution(connection => {
-                const sql = `DELETE FROM \`accounts\` WHERE id = ${idDel}`
-
-                connection.query(sql, function (err) { 
-                    if (err) {
-                        reject(err);
-                    }
-                    else resolve();
-                })
-            })
-        })
-    },
-    getAllAccounts: () => {
-        return new Promise((resolve, reject) => {
-            dbExecution(connection => {
-                const sql = `SELECT * FROM \`accounts\``;
-                connection.query(sql, (err, rows) =>{
-                    if (!err){
-                        resolve(rows)
-                    }
-                    else{
-                        reject(err);
-                    }
-                })
-            })
-        })
-    }
-})
 
 
