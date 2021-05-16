@@ -34,6 +34,7 @@ function createRow(account) {
 }
  */
 
+
 function handleShowButton(e) {
     /**
      * @type {HTMLElement}
@@ -59,10 +60,12 @@ function handleDeleteButton(e) {
         return;
     }
 
+    //const id = e.target.dataset.id
+    //const {id: ix} = e.target.dataset; destructing
     const {id} = e.target.dataset;
-    const index = id - 1;
+    //const index = id - 1;
 
-    accounts.splice(index, 1);
+    db.deletePassword(id)
 
     renderRows(accounts);
     setAccounts(accounts);
@@ -101,7 +104,7 @@ function renderRows(accounts) {
 }
 
 window.onload = () => {
-    accounts = getAccounts();
+    accounts = db.getAllAccounts();
 
     renderRows(accounts);
 }

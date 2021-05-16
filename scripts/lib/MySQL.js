@@ -1,7 +1,6 @@
 var mysql = require('mysql');
 
 
-
 var conn = mysql.createConnection({
     host : 'localhost',
     user : 'root',
@@ -9,6 +8,11 @@ var conn = mysql.createConnection({
     database : 'PassVault1'
 });
 
-module.exports = conn;
-
-
+module.exports = {
+    conn,
+    dbExecution: (callback) => {
+        conn.connect();
+        callback(conn);
+        conn.end();
+    }
+}
