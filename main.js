@@ -1,4 +1,6 @@
 const { app, BrowserWindow } = require('electron')
+const { conn } = require('./scripts/lib/MySQL'); 
+
 const path = require('path')
 
 function createWindow () {
@@ -20,7 +22,13 @@ app.whenReady().then(() => {
         if (BrowserWindow.getAllWindows().length === 0) {
             createWindow()
         }
+        conn.connect();
     })
+})
+
+app.on('before-quit', () => {
+    conn.end();
+    //onsole.log("Conn ends");
 })
 
 app.on('window-all-closed', () => {

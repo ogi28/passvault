@@ -11,15 +11,15 @@ const createRow = account => {
     const pwd = account.password;
 
     return `
-    <tr id="row_${++rowCount}">
-        <td>${rowCount}</td>
-        <td>${account.accountName}</td>
+    <tr id="row_${account.id}">
+        <td>${++rowCount}</td>
+        <td>${account.account}</td>
         <td>${account.username}</td>
         <td class="pass">${'*'.repeat(7)}</td>
         <td class="actions">
-            <button class="show-btn btn btn-primary" data-id="${rowCount}" data-pass="${pwd}">&#128065;</button>
+            <button class="show-btn btn btn-primary" data-id="${account.id}" data-pass="${pwd}">&#128065;</button>
             <button class="copy-btn btn btn-primary" data-pass="${pwd}">Copy</button>
-            <button class="delete-btn btn btn-danger" data-id="${rowCount}">Delete</button>
+            <button class="delete-btn btn btn-danger" data-id="${account.id}">Delete</button>
         </td>
     </tr>
     `
@@ -55,20 +55,18 @@ function handleCopyButton(e) {
     Util.copyToClipboard(e.target.dataset.pass);
 }
 
-function handleDeleteButton(e) {
+async function handleDeleteButton(e) {
     if (!confirm('Are you sure?')) {
         return;
     }
-
     //const id = e.target.dataset.id
     //const {id: ix} = e.target.dataset; destructing
     const {id} = e.target.dataset;
     //const index = id - 1;
 
-    db.deletePassword(id)
+    await db.deletePassword(id)
 
-    renderRows(accounts);
-    setAccounts(accounts);
+    renderRows(await db.getAllAccounts());
 }
 
 function initiateActionButtonsEventListeners() {
@@ -103,8 +101,12 @@ function renderRows(accounts) {
     initiateActionButtonsEventListeners();
 }
 
-window.onload = () => {
-    accounts = db.getAllAccounts();
-
-    renderRows(accounts);
+window.onload = async () => {
+    try {
+        accounts = await db.getAllAccounts();
+        renderRows(accounts);
+    }
+    catch(err){
+        console.error(err);
+    }
 }

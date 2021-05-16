@@ -11,8 +11,7 @@ var conn = mysql.createConnection({
 module.exports = {
     conn,
     dbExecution: (callback) => {
-        conn.connect();
+        //if ()
         callback(conn);
-        conn.end();
     }
 }

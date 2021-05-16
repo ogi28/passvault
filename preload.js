@@ -1,5 +1,5 @@
 const {contextBridge, clipboard} = require('electron');
-const {dbExecution /*, conn*/ } = require('./scripts/lib/MySQL'); 
+const {dbExecution} = require('./scripts/lib/MySQL'); 
 //const {a:{h}} = require
 console.log(dbExecution)
 window.addEventListener('DOMContentLoaded', () => {
@@ -14,6 +14,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 })
 
+
 contextBridge.exposeInMainWorld('Util', {
     copyToClipboard: (text) => clipboard.write({text})
 
@@ -25,38 +26,42 @@ contextBridge.exposeInMainWorld('db', {
         dbExecution(connection => {
             const sql = `INSERT INTO \`accounts\` (\`account\`, \`username\`, \`password\`) VALUES ('${account.accountName}', '${account.username}', '${account.password}');`;
             
-            connection.query(sql, function (err, res) { //fields not used?
+            connection.query(sql, function (err) { //fields not used?
                 if (err) {
                     throw err;
                 }
-
-                console.log(res);
             })
         })
     },
     deletePassword: (idDel) => {
-        dbExecution(connection => {
-            const sql = `DELETE FROM \`accounts\` WHERE id = ${idDel}`
+        return new Promise((resolve, reject) =>{
+            dbExecution(connection => {
+                const sql = `DELETE FROM \`accounts\` WHERE id = ${idDel}`
 
-            connection.query(sql, function (err, res) { 
-                if (err) {
-                    throw err;
-                }
-
-                console.log(res);
+                connection.query(sql, function (err) { 
+                    if (err) {
+                        reject(err);
+                    }
+                    else resolve();
+                })
             })
-
         })
     },
     getAllAccounts: () => {
-        dbExecution(connection => {
-            const qry = 'SELECT * FROM accounts';
-            connection.query(qry, (err,rows) => {
-                if (err) throw err;
-
-                console.log(rows);
-            });
-        });
+        return new Promise((resolve, reject) => {
+            dbExecution(connection => {
+                const sql = `SELECT * FROM \`accounts\``;
+                connection.query(sql, (err, rows) =>{
+                    if (!err){
+                        resolve(rows)
+                    }
+                    else{
+                        reject(err);
+                    }
+                })
+            })
+        })
     }
 })
+
 
