@@ -1,7 +1,9 @@
-const accountsCRUDAPI = Db.createCRUDAPI('accounts');
+const {createCRUDAPI} = require ('../db');
+const accountsCRUDAPI = createCRUDAPI('accounts');
 
-function get(id) {
-    return accountsCRUDAPI.get({ id: id });
+async function get(id) {
+    const result = await accountsCRUDAPI.get({ id: id });
+    return result[0] || null;
 }
 
 function getAll() {
@@ -14,4 +16,15 @@ function add(account) {
 
 function update(id, account) {
     return accountsCRUDAPI.update(account, { id: id });
+}
+function deleteAcc(id){
+    return accountsCRUDAPI.delete(id)
+}
+
+module.exports = {
+    get,
+    getAll,
+    add,
+    update,
+    deleteAcc
 }

@@ -54,9 +54,9 @@ async function handleDeleteButton(e) {
     //const {id: ix} = e.target.dataset; destructing
     const { id } = e.target.dataset;
 
-    await db.deletePassword(id);
+    await AccountsAPI.deleteAcc(id);
 
-    renderRows(await db.getAllAccounts());
+    renderRows(await AccountsAPI.getAll());
 }
 
 function initiateActionButtonsEventListeners() {
@@ -93,7 +93,7 @@ function renderRows(accounts) {
 
 window.onload = async () => {
     try {
-        accounts = await db.getAllAccounts();
+        accounts = await AccountsAPI.getAll();
         renderRows(accounts);
     } catch (err) {
         console.error(err);

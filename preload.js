@@ -3,6 +3,7 @@
 require('./scripts/lib/db');
 require('./scripts/lib/db-deprecated');
 require('./scripts/lib/util');
+require('./scripts/lib/api'); //searches for index by default
 
 window.addEventListener('DOMContentLoaded', () => {
     const replaceText = (selector, text) => {

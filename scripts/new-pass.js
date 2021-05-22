@@ -4,10 +4,10 @@ function saveNewPass(e) {
     const username = getValue('username');
     const password = getValue('password');
 
-    db.addNewAccount({
-        accountName,
-        username,
-        password,
+    AccountsAPI.add({
+        account: accountName,
+        username: username,
+        password: password,
     });
 
     document.forms['input'].reset();
