@@ -1,38 +1,38 @@
-const { app, BrowserWindow } = require('electron')
-const { conn } = require('./scripts/lib/MySQL'); 
+const { app, BrowserWindow } = require('electron');
+const { conn } = require('./scripts/lib/MySQL');
 
-const path = require('path')
+const path = require('path');
 
-function createWindow () {
+function createWindow() {
     const win = new BrowserWindow({
         width: 800,
         height: 600,
         webPreferences: {
-            preload: path.join(__dirname, 'preload.js')
-        }
-    })
+            preload: path.join(__dirname, 'preload.js'),
+        },
+    });
 
-    win.loadFile('pages/index.html')
+    win.loadFile('pages/index.html');
 }
 
 app.whenReady().then(() => {
-    createWindow()
+    createWindow();
 
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) {
-            createWindow()
+            createWindow();
         }
         conn.connect();
-    })
-})
+    });
+});
 
 app.on('before-quit', () => {
     conn.end();
     //onsole.log("Conn ends");
-})
+});
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
-        app.quit()
+        app.quit();
     }
-})
+});

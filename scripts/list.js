@@ -7,7 +7,7 @@ let accounts = [];
  * @param {{accountName: string, username: string, password: string}} account
  * @returns {string}
  */
-const createRow = account => {
+const createRow = (account) => {
     const pwd = account.password;
 
     return `
@@ -19,21 +19,15 @@ const createRow = account => {
         <td class="actions">
             <button class="show-btn btn btn-primary" data-id="${account.id}" data-pass="${pwd}">&#128065;</button>
             <button class="copy-btn btn btn-primary" data-pass="${pwd}">Copy</button>
+            <button class="update-brn btn btn-primary" data-id"${account.id}">Update</button>
             <button class="delete-btn btn btn-danger" data-id="${account.id}">Delete</button>
         </td>
     </tr>
-    `
-}
+    `;
+};
 const getShowButtons = () => document.querySelectorAll('.actions button.show-btn');
 const getCopyButtons = () => document.querySelectorAll('.actions button.copy-btn');
 const getDeleteButtons = () => document.querySelectorAll('.actions button.delete-btn');
-
-/*
-function createRow(account) {
-    return `...`
-}
- */
-
 
 function handleShowButton(e) {
     /**
@@ -43,9 +37,7 @@ function handleShowButton(e) {
     const tdPass = document.querySelector(`#row_${element.dataset.id} td.pass`);
     const isPassShown = () => element.classList.contains('shown');
 
-    tdPass.textContent = isPassShown()
-        ? '*'.repeat(7)
-        : element.dataset.pass;
+    tdPass.textContent = isPassShown() ? '*'.repeat(7) : element.dataset.pass;
 
     element.classList.toggle('shown');
     element.innerHTML = isPassShown() ? '&#128064;' : '&#128065;';
@@ -59,26 +51,24 @@ async function handleDeleteButton(e) {
     if (!confirm('Are you sure?')) {
         return;
     }
-    //const id = e.target.dataset.id
     //const {id: ix} = e.target.dataset; destructing
-    const {id} = e.target.dataset;
-    //const index = id - 1;
+    const { id } = e.target.dataset;
 
-    await db.deletePassword(id)
+    await db.deletePassword(id);
 
     renderRows(await db.getAllAccounts());
 }
 
 function initiateActionButtonsEventListeners() {
-    getShowButtons().forEach(btn => {
+    getShowButtons().forEach((btn) => {
         btn.addEventListener('click', handleShowButton);
     });
 
-    getCopyButtons().forEach(btn => {
+    getCopyButtons().forEach((btn) => {
         btn.addEventListener('click', handleCopyButton);
     });
 
-    getDeleteButtons().forEach(btn => {
+    getDeleteButtons().forEach((btn) => {
         btn.addEventListener('click', handleDeleteButton);
     });
 }
@@ -86,9 +76,9 @@ function initiateActionButtonsEventListeners() {
 function resetList() {
     rowCount = 0;
 
-    getShowButtons().forEach(btn => btn.removeEventListener('click', handleShowButton));
-    getCopyButtons().forEach(btn => btn.removeEventListener('click', handleCopyButton));
-    getDeleteButtons().forEach(btn => btn.removeEventListener('click', handleDeleteButton));
+    getShowButtons().forEach((btn) => btn.removeEventListener('click', handleShowButton));
+    getCopyButtons().forEach((btn) => btn.removeEventListener('click', handleCopyButton));
+    getDeleteButtons().forEach((btn) => btn.removeEventListener('click', handleDeleteButton));
 }
 
 function renderRows(accounts) {
@@ -96,7 +86,7 @@ function renderRows(accounts) {
 
     const tbody = document.querySelector('table tbody');
 
-    tbody.innerHTML = accounts.map(account => createRow(account)).join('');
+    tbody.innerHTML = accounts.map((account) => createRow(account)).join('');
 
     initiateActionButtonsEventListeners();
 }
@@ -105,8 +95,7 @@ window.onload = async () => {
     try {
         accounts = await db.getAllAccounts();
         renderRows(accounts);
-    }
-    catch(err){
+    } catch (err) {
         console.error(err);
     }
-}
+};

@@ -1,5 +1,5 @@
-const {contextBridge} = require('electron');
-const {conn} = require('./MySQL');
+const { contextBridge } = require('electron');
+const { conn } = require('./MySQL');
 
 function getProperties(obj) {
     // TODO: implement
@@ -17,28 +17,50 @@ contextBridge.exposeInMainWorld('Db', {
             create: (payload) => {
                 return new Promise((resolve, reject) => {
                     const properties = getProperties(payload);
-                    const propertiesStr = `(${properties.map(t => `\`${t}\``).join(',')})`
+                    const propertiesStr = `(${properties.map((t) => `\`${t}\``).join(',')})`; //eee
                     const values = getValues(payload);
-                    const sql = `INSERT INTO ${tableName} ${propertiesStr} VALUES(${values.join(',')})`
+                    const sql = `INSERT INTO ${tableName} ${propertiesStr} VALUES(${values.join(',')})`;
 
                     conn.query(sql, (err, results) => {
-                        if (!err) {
-                            resolve(results);
-                        } else {
-                            reject(err);
-                        }
-                    })
+                        if (!err) resolve(results);
+                        else reject(err);
+                    });
                 });
             },
             get: (whereCondition) => {
-                // TODO: implement
+                return new Promise((resolve, reject) => {
+                    const sql = `SELECT * FROM ${tableName} WHERE id = ${whereCondition}`;
+                    conn.query(sql, (err, results) => {
+                        if (!err) resolve(results);
+                        else reject(err);
+                    });
+                });
             },
+            //FIXME
             update: (payload, whereCondition) => {
-                // TODO: implement
+                return new Promise((resolve, reject) => {
+                    const properties = getProperties(payload);
+                    const propertiesStr = `(${properties.map((t) => `\`${t}\``).join(',')})`; //eee
+                    const values = getValues(payload);
+                    const sql = `UPDATE ${propertiesStr} FROM ${values} WHERE id = ${whereCondition}`;
+
+                    conn.query(sql, (err, results) => {
+                        if (!err) resolve(results);
+                        else reject(err);
+                    });
+                });
+
             },
+            //FIXME
             delete: (whereCondition) => {
-                // TODO: implement
-            }
-        }
-    }
-})
+                return new Promise((resolve, reject) => {
+                    const sql = `DELETE FROM ${tableName} WHERE id = ${whereCondition}`;
+                    conn.query(sql, (err, results) => {
+                        if (!err) resolve(results);
+                        else reject(err);
+                    });
+                });
+            },
+        };
+    },
+});

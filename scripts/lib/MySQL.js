@@ -1,9 +1,9 @@
 var mysql = require('mysql');
 var conn = mysql.createConnection({
-    host : 'localhost',
-    user : 'root',
-    password : '123',
-    database : 'PassVault1'
+    host: 'localhost',
+    user: 'root',
+    password: '123',
+    database: 'PassVault1',
 });
 
 module.exports = {
@@ -11,5 +11,5 @@ module.exports = {
     dbExecution: (callback) => {
         //if ()
         callback(conn);
-    }
-}
+    },
+};

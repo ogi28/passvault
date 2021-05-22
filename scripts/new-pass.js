@@ -8,7 +8,7 @@ function saveNewPass(e) {
         accountName,
         username,
         password,
-    })
+    });
 
     document.forms['input'].reset();
 

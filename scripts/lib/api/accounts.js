@@ -1,7 +1,7 @@
 const accountsCRUDAPI = Db.createCRUDAPI('accounts');
 
 function get(id) {
-    return accountsCRUDAPI.get({id: id});
+    return accountsCRUDAPI.get({ id: id });
 }
 
 function getAll() {
@@ -13,5 +13,5 @@ function add(account) {
 }
 
 function update(id, account) {
-    return accountsCRUDAPI.update(account, {id: id});
+    return accountsCRUDAPI.update(account, { id: id });
 }
