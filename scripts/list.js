@@ -19,7 +19,7 @@ const createRow = (account) => {
         <td class="actions">
             <button class="show-btn btn btn-primary" data-id="${account.id}" data-pass="${pwd}">&#128065;</button>
             <button class="copy-btn btn btn-primary" data-pass="${pwd}">Copy</button>
-            <button class="update-brn btn btn-primary" data-id"${account.id}">Update</button>
+            <a href="./update.html?ID=${account.id}" class="btn btn-primary">Update</a>
             <button class="delete-btn btn btn-danger" data-id="${account.id}">Delete</button>
         </td>
     </tr>

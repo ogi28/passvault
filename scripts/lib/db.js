@@ -4,6 +4,15 @@ function getProperties(obj) {
     return Object.keys(obj);
 }
 
+function buildWhereCondition(whereCondition) {
+    return (
+        ' WHERE ' +
+        getProperties(whereCondition)
+            .map((prop) => `${prop}=${whereCondition[prop]}`)
+            .join(' AND ')
+    ); // join ignores if the array only has 1 element
+}
+
 function getValues(obj) {
     return Object.values(obj);
 }
@@ -41,11 +50,7 @@ const Db = {
                 return new Promise((resolve, reject) => {
                     let sql = `SELECT * FROM ${tableName}`;
                     if (whereCondition) {
-                        sql +=
-                            ' WHERE ' +
-                            getProperties(whereCondition)
-                                .map((prop) => `${prop}=${whereCondition[prop]}`)
-                                .join(' AND '); // join ignores if the array only has 1 element
+                        sql += buildWhereCondition(whereCondition);
                     }
                     conn.query(sql, (err, results) => {
                         if (!err) resolve(results);
@@ -53,13 +58,16 @@ const Db = {
                     });
                 });
             },
-            //FIXME
             update: (payload, whereCondition) => {
                 return new Promise((resolve, reject) => {
                     const properties = getProperties(payload);
-                    const propertiesStr = `(${properties.map((t) => `\`${t}\``).join(',')})`; //eee
-                    const values = getValues(payload);
-                    const sql = `UPDATE ${propertiesStr} FROM ${values} WHERE id = ${whereCondition}`;
+                    const setString = properties
+                        .map((property) => {
+                            return `${property} = ${convertString(payload[property])}`;
+                        })
+                        .join(', ');
+                    //UPDATE t1 SET col1 = col1 + 1, col2 = col1;
+                    const sql = `UPDATE ${tableName} SET ${setString}` + buildWhereCondition(whereCondition);
 
                     conn.query(sql, (err, results) => {
                         if (!err) resolve(results);
@@ -67,7 +75,6 @@ const Db = {
                     });
                 });
             },
-            //FIXME
             delete: (whereCondition) => {
                 return new Promise((resolve, reject) => {
                     const sql = `DELETE FROM ${tableName} WHERE id = ${whereCondition}`;

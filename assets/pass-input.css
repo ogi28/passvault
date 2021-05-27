@@ -14,3 +14,12 @@ form {
 input {
     margin-bottom: 5px;
 }
+
+.passwordWrapper {
+    position: relative;
+    width: 100%;
+}
+.show-btn {
+    position: absolute;
+    right: -70px;
+}
