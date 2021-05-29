@@ -1,4 +1,4 @@
-import {cycledCharCodeAt, hexToString, stringToHex} from './utils.js';
+import {cycledCharCodeAt, hexToString, stringToHex} from './utils';
 
 export function encrypt(str, secret) {
     return stringToHex(
