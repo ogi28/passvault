@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>New Password</title>
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';"/>
-    <link rel="stylesheet" href="../assets/main.css"/>
-    <link rel="stylesheet" href="../assets/pass-input.css"/>
-</head>
-<body>
-<div class="back-wrapper">
-    <a href="index.html" class="btn btn-primary"><span>&larr;</span></a>
-</div>
-<div class="main">
-    <div>
-        <h1>New Password</h1>
-    </div>
-    <form name="input" onsubmit="saveNewPass(event)">
-        <input required name="account" placeholder="Account name"/>
-        <input required name="username" placeholder="Username/Email"/>
-        <input required name="password" type="password" placeholder="Password"/>
-        <input type="submit" class="btn btn-primary btn-block" value="Save">
-    </form>
-</div>
-<script src="../scripts/new-pass.js"></script>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <title>New Password</title>
+        <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+        <link rel="stylesheet" href="../assets/main.css" />
+        <link rel="stylesheet" href="../assets/pass-input.css" />
+    </head>
+    <body>
+        <div class="back-wrapper">
+            <a href="index.html" class="btn btn-primary"><span>&larr;</span></a>
+        </div>
+        <div class="main">
+            <div>
+                <h1>New Password</h1>
+            </div>
+            <form name="input" onsubmit="saveNewPass(event)">
+                <input required name="account" placeholder="Account name" />
+                <input required name="username" placeholder="Username/Email" />
+                <div class="passwordWrapper">
+                    <input required name="password" type="password" placeholder="Password" />
+                    <button type="button" onclick="togglePassword()" class="show-btn btn btn-primary">&#128065;</button>
+                </div>
+            </form>
+        </div>
+        <script src="../scripts/new-pass.js"></script>
+    </body>
 </html>
