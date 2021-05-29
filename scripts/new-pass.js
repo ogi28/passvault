@@ -13,7 +13,7 @@ function saveNewPass(e) {
     AccountsAPI.add({
         account: accountName,
         username: username,
-        password: password,
+        password: EncryptionAPI.encrypt(password, EncryptionAPI.getSecret()),
     });
 
     document.forms['input'].reset();
@@ -43,9 +43,3 @@ function togglePassword() {
     button.innerHTML = isPassShown() ? '&#128064;' : '&#128065;';
 }
 
-window.onload = async () => {
-    const accountObj = await AccountsAPI.get(getID());
-    setValue('account', accountObj.account);
-    setValue('username', accountObj.username);
-    setValue('password', accountObj.password);
-};
