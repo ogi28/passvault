@@ -1,5 +1,9 @@
-const { cycledCharCodeAt, hexToString, stringToHex } = require('./utils');
+const { cycledCharCodeAt, hexToString, stringToHex, generateSecretKey } = require('./utils');
 const fs = require('fs');
+const path = require('path');
+const { ipcRenderer } = require('electron');
+
+const userDataPath = ipcRenderer.sendSync('userDataPath');
 
 function encrypt(str, secret) {
     return stringToHex(
@@ -17,11 +21,22 @@ function decrypt(encryptedHexStr, secret) {
         .join('');
 }
 
+function shouldCreateSecretKey() {
+    const file = path.join(userDataPath, 'secret.key');
+
+    const handleFileAccess = (err) => {
+        if (!err) return;
+        fs.writeFileSync(file, generateSecretKey());
+    };
+    // Check if the file exists in the current directory.
+    fs.access(file, fs.constants.F_OK, handleFileAccess);
+}
+
 function getSecret() {
     try {
-        const data = fs.readFileSync('/home/john/PassVault/secret.key');
-        //console.log(data);
-        return data.toString();
+        const secretKeyPath = path.join(userDataPath, 'secret.key');
+
+        return fs.readFileSync(secretKeyPath).toString();
     } catch (err) {
         console.error(err);
     }
@@ -31,4 +46,5 @@ module.exports = {
     encrypt,
     decrypt,
     getSecret,
+    shouldCreateSecretKey: () => shouldCreateSecretKey(),
 };

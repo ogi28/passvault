@@ -1,7 +1,11 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const { conn } = require('./scripts/lib/MySQL');
 
 const path = require('path');
+
+ipcMain.on('userDataPath', (event) => {
+    return app.getPath('userData');
+});
 
 function createWindow() {
     const win = new BrowserWindow({

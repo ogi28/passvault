@@ -37,7 +37,9 @@ function handleShowButton(e) {
     const tdPass = document.querySelector(`#row_${element.dataset.id} td.pass`);
     const isPassShown = () => element.classList.contains('shown');
 
-    tdPass.textContent = isPassShown() ? '*'.repeat(7) : EncryptionAPI.decrypt(element.dataset.pass, EncryptionAPI.getSecret());
+    tdPass.textContent = isPassShown()
+        ? '*'.repeat(7)
+        : EncryptionAPI.decrypt(element.dataset.pass, EncryptionAPI.getSecret());
 
     element.classList.toggle('shown');
     element.innerHTML = isPassShown() ? '&#128064;' : '&#128065;';
