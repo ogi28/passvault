@@ -4,7 +4,7 @@ const { conn } = require('./scripts/lib/MySQL');
 const path = require('path');
 
 ipcMain.on('userDataPath', (event) => {
-    return app.getPath('userData');
+    event.returnValue = app.getPath('userData');
 });
 
 function createWindow() {
