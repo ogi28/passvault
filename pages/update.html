@@ -19,8 +19,11 @@
                 <input required name="account" placeholder="Account name" />
                 <input required name="username" placeholder="Username/Email" />
                 <div class="passwordWrapper">
-                    <input required name="password" type="password" placeholder="Password" />
+                    <input id = "passGen"required name="password" type="password" placeholder="Password" />
                     <button type="button" onclick="togglePassword()" class="show-btn btn btn-primary">&#128065;</button>
+                    <button type="button" onclick="generatePassword()" class="generate-btn btn btn-primary">
+                        Generate Password
+                    </button>
                 </div>
 
                 <input type="submit" class="btn btn-primary btn-block" value="Save" />

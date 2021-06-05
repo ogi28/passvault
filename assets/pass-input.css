@@ -23,3 +23,7 @@ input {
     position: absolute;
     right: -70px;
 }
+.generate-btn {
+    position: absolute;
+    right: -260px;
+}

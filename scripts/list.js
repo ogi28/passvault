@@ -46,7 +46,7 @@ function handleShowButton(e) {
 }
 
 function handleCopyButton(e) {
-    Util.copyToClipboard(e.target.dataset.pass);
+    Util.copyToClipboard(EncryptionAPI.decrypt(e.target.dataset.pass, EncryptionAPI.getSecret()));
 }
 
 async function handleDeleteButton(e) {

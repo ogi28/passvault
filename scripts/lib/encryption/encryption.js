@@ -45,6 +45,6 @@ function getSecret() {
 module.exports = {
     encrypt,
     decrypt,
-    getSecret,
+    getSecret: () => getSecret(),
     shouldCreateSecretKey: () => shouldCreateSecretKey(),
 };
