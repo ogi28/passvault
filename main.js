@@ -32,7 +32,7 @@ app.whenReady().then(() => {
 
 app.on('before-quit', () => {
     conn.end();
-    //onsole.log("Conn ends");
+    //console.log("Conn ends");
 });
 
 app.on('window-all-closed', () => {

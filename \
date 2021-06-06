@@ -14,7 +14,7 @@ function updatePass(e) {
     AccountsAPI.update(id, {
         account: accountName,
         username: username,
-        password: EncryptionAPI.encrypt(password, EncryptionAPI.getSecret()),
+        password: password,
     });
 
     document.forms['input'].reset();
@@ -45,11 +45,12 @@ function togglePassword() {
 const CharMode = {
     LowerCase: '0x0001',
     UpperCase: '0x0002',
-    SpecChar: '0x0004',
-    Num: '0x0008',
+    SpecChar: '0x0003',
+    Num: '0x0004',
 };
 
 function generatePassword(options = {}) {
+    debugger;
     const defaultOptions = {
         length: 30,
         charMode: CharMode.LowerCase | CharMode.UpperCase | CharMode.Num | CharMode.SpecChar,
@@ -60,6 +61,7 @@ function generatePassword(options = {}) {
     };
     var result = [];
     const charactersOptions = [];
+    var charactersLength = options.length;
 
     if (options.charMode & CharMode.LowerCase) {
         charactersOptions.push('abcdefghijklmnopqrstuvwxyz');

@@ -21,7 +21,7 @@
                 <div class="passwordWrapper">
                     <input id = "passGen"required name="password" type="password" placeholder="Password" />
                     <button type="button" onclick="togglePassword()" class="show-btn btn btn-primary">&#128065;</button>
-                    <button type="button" onclick="generatePassword()" class="generate-btn btn btn-primary">
+                    <button type="button" onclick="generatePassword({length: 8, charMode: '0x0003'})" class="generate-btn btn btn-primary">
                         Generate Password
                     </button>
                 </div>
