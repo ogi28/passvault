@@ -86,6 +86,14 @@ const Db = {
             },
         };
     },
+    executeQuery: (query) => {
+        return new Promise((resolve, reject) => {
+            conn.query(query, (err, results) => {
+                if (!err) resolve(results);
+                else reject(err);
+            });
+        });
+    },
 };
 
 module.exports = Db;

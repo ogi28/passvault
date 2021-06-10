@@ -1,4 +1,4 @@
-const {createCRUDAPI} = require ('../db');
+const { createCRUDAPI, executeQuery } = require('../db');
 const accountsCRUDAPI = createCRUDAPI('accounts');
 
 async function get(id) {
@@ -17,8 +17,13 @@ function add(account) {
 function update(id, account) {
     return accountsCRUDAPI.update(account, { id: id });
 }
-function deleteAcc(id){
-    return accountsCRUDAPI.delete(id)
+function deleteAcc(id) {
+    return accountsCRUDAPI.delete(id);
+}
+
+function searchInfo(accountName) {
+    const sqlQuery = `SELECT * FROM accounts WHERE LOWER(account) LIKE '${accountName.toLowerCase()}%'`;
+    return executeQuery(sqlQuery);
 }
 
 module.exports = {
@@ -26,5 +31,6 @@ module.exports = {
     getAll,
     add,
     update,
-    deleteAcc
-}
+    deleteAcc,
+    searchInfo,
+};

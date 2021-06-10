@@ -61,6 +61,15 @@ async function handleDeleteButton(e) {
     renderRows(await AccountsAPI.getAll());
 }
 
+function initiateSearchBarEventListener() {
+    const searchEventListener = document.querySelector('input[name="searchbar"]');
+    searchEventListener.addEventListener('input', async (event) => {
+        const target = event.target.value;
+        const result =  target ? await AccountsAPI.searchInfo(target) : await AccountsAPI.getAll();
+        renderRows(result);
+    });
+}
+
 function initiateActionButtonsEventListeners() {
     getShowButtons().forEach((btn) => {
         btn.addEventListener('click', handleShowButton);
@@ -95,6 +104,7 @@ function renderRows(accounts) {
 
 window.onload = async () => {
     try {
+        initiateSearchBarEventListener();
         accounts = await AccountsAPI.getAll();
         renderRows(accounts);
     } catch (err) {
