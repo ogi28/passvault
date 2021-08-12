@@ -15,7 +15,7 @@
 This project is still in development. You can track the evolution in this section.
 
 - [x] Password encryption
-- [ ] Password generator
-- [ ] Search feature
+- [x] Password generator
+- [x] Search feature
 - [ ] Improve password encryption algorithm
 
