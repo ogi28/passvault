@@ -6,7 +6,7 @@
 
 **:shield: Client-side encryption/decryption**
 
-**:mag_right: Search among thounds of lines**
+**:mag_right: Search among thousands of lines**
 
 **:handshake: User-friendly interface**
 
