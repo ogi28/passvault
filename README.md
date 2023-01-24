@@ -1,4 +1,5 @@
 # :closed_lock_with_key: PassVault
+![](https://github.com/ogi28/passvault/blob/main/Screenshots/PassVault.gif)
 
 ### Don't keep your passwords in your mind, use PassVault
 
